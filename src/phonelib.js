@@ -164,8 +164,8 @@ function getIso2Code(number, countryCode) {
         return phoneUtil.getRegionCodeForCountryCode(numberObj.getCountryCodeOrDefault())
     } catch (e) {
         // broken
-        console.log(e);
-        return 'US';
+        // console.log(e);
+        return '';
     }
 }
 
