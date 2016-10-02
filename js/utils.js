@@ -31,8 +31,8 @@ window.getParentByClass = function(el, selector, last) {
 
 window.convertToPx = function(size, context) {
     var baseSize = 1;
-    if (size.indexOf('em') > -1) baseSize = getComputedStyle(context || document.documentElement).fontSize;
-    if (size.indexOf('rem') > -1) baseSize = getComputedStyle(document.documentElement).fontSize;
+    if ((size + '').indexOf('em') > -1) baseSize = getComputedStyle(context || document.documentElement).fontSize;
+    if ((size + '').indexOf('rem') > -1) baseSize = getComputedStyle(document.documentElement).fontSize;
     return parseFloat(size) * parseFloat(baseSize);
 }
 
