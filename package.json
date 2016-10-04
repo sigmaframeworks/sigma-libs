@@ -1,7 +1,7 @@
 {
     "name": "sigma-libs",
-    "version": "0.0.4",
-    "description": "",
+    "version": "0.0.5",
+    "description": "Sigma Frameworks Utilities",
     "keywords": [],
     "homepage": "",
     "bugs":
@@ -11,7 +11,7 @@
     "license": "MIT",
     "author": "Adarsh Pastakia <adarshpastakia@outlook.com> (http://adarshpastakia.github.io/)",
     "main": "index.js",
-    "typings": "typings/libs.d.ts",
+    "typings": "index.d.ts",
     "repository":
     {
         "type": "git",
@@ -23,10 +23,6 @@
         "jspmPackage": true,
         "main": "index",
         "format": "amd",
-        "directories":
-        {
-            "dist": "/"
-        },
         "peerDependencies":
         {},
         "dependencies":

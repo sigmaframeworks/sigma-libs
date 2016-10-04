@@ -1,3 +1,22 @@
+// 
+// @description : 
+// @author      : Adarsh Pastakia
+// @copyright   : 2016
+// @license     : MIT
+
+window.UA_EDGE = "ua-edge";
+window.UA_OPERA = "ua-opera";
+window.UA_CHROME = "ua-chrome";
+window.UA_SAFARI = "ua-safari";
+window.UA_FIREFOX = "ua-firefox";
+
+window.browserAgent = function() {
+    var ua = (navigator.userAgent || '').toLowerCase();
+    if (ua.includes('chrome')) return UA_CHROME;
+    if (ua.includes('safari')) return UA_SAFARI;
+    if (ua.includes('firefox')) return UA_FIREFOX;
+}
+
 window.isTrue = function(b) {
     return (/^(true|yes|1|y|on)$/i).test(b);
 }
@@ -8,12 +27,23 @@ window.isEmpty = function(a) {
     if (typeof a === 'number') return false;
     return a === undefined || a === null || a === '' || a.length === 0 || Object.keys(a).length == 0;
 }
+window.isString = function(a) {
+    return (typeof a === 'string');
+}
+window.isNumber = function(a) {
+    return (typeof a === 'number');
+}
+window.isDecimal = function(a) {
+    return (typeof a === 'number' && a % 1 > 0);
+}
 window.isFunction = function(a) {
     return (typeof a === 'function');
 }
 
-window.getParentByTag = function(el, selector) {
+window.getParentByTag = function(el, selector, last) {
     do {
+        if (last && last instanceof Element && el === last) return null;
+        if (last && (typeof last) === 'string' && (el.classList.contains(last) || el.tagName.toLowerCase() === last.toLowerCase())) return null;
         if (el.tagName.toLowerCase() === selector.toLowerCase()) return el;
         el = el.parentElement;
     } while (el !== null);
@@ -22,7 +52,8 @@ window.getParentByTag = function(el, selector) {
 
 window.getParentByClass = function(el, selector, last) {
     do {
-        if (last && el.classList.contains(last)) return null;
+        if (last && last instanceof Element && el === last) return null;
+        if (last && (typeof last) === 'string' && (el.classList.contains(last) || el.tagName.toLowerCase() === last.toLowerCase())) return null;
         if (el.classList.contains(selector)) return el;
         el = el.parentElement;
     } while (el !== null);
@@ -30,13 +61,13 @@ window.getParentByClass = function(el, selector, last) {
 }
 
 window.convertToPx = function(size, context) {
-    var baseSize = 1;
+    var baseSize = '1';
     if ((size + '').indexOf('em') > -1) baseSize = getComputedStyle(context || document.documentElement).fontSize;
     if ((size + '').indexOf('rem') > -1) baseSize = getComputedStyle(document.documentElement).fontSize;
-    return parseFloat(size) * parseFloat(baseSize);
+    return (parseFloat(size) * parseFloat(baseSize));
 }
 
-window.getAscii = function(str) {
+window.getAscii = (str) => {
     if (isEmpty(str)) return '';
     var conversions = {};
     conversions['ae'] = 'ä|æ|ǽ';
