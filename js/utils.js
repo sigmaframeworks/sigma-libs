@@ -9,12 +9,16 @@ window.UA_OPERA = "ua-opera";
 window.UA_CHROME = "ua-chrome";
 window.UA_SAFARI = "ua-safari";
 window.UA_FIREFOX = "ua-firefox";
+window.UA_UNKNOWN = "ua-unknown";
 
 window.browserAgent = function() {
     var ua = (navigator.userAgent || '').toLowerCase();
-    if (ua.includes('chrome')) return UA_CHROME;
-    if (ua.includes('safari')) return UA_SAFARI;
-    if (ua.includes('firefox')) return UA_FIREFOX;
+    if (ua.indexOf('opr') >= 0) return UA_OPERA;
+    else if (ua.indexOf('edge') >= 0) return UA_EDGE;
+    else if (ua.indexOf('chrome') >= 0) return UA_CHROME;
+    else if (ua.indexOf('safari') >= 0) return UA_SAFARI;
+    else if (ua.indexOf('firefox') >= 0) return UA_FIREFOX;
+    else return UA_UNKNOWN;
 }
 
 window.isTrue = function(b) {
@@ -67,7 +71,7 @@ window.convertToPx = function(size, context) {
     return (parseFloat(size) * parseFloat(baseSize));
 }
 
-window.getAscii = (str) => {
+window.getAscii = function(str) {
     if (isEmpty(str)) return '';
     var conversions = {};
     conversions['ae'] = 'ä|æ|ǽ';

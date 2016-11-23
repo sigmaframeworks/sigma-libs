@@ -1514,7 +1514,7 @@ var countries = [{
     "continent": "Africa",
     "iso2": "ST",
     "iso3": "STP",
-    "name": "Sao Tome And Principe",
+    "name": "São Tomé And Príncipe",
     "tld": ".st",
     "currency": "STD",
     "phone": "+239"

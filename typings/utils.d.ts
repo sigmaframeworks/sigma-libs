@@ -33,6 +33,13 @@ declare function unescape(v: string): string;
 
 declare interface Element {
     au: any;
+
+    offsetLeft: number;
+    offsetTop: number;
+    offsetWidth: number;
+    offsetHeight: number;
+
+    children: HTMLCollection;
 }
 
 declare interface ICountry {

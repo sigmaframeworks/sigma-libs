@@ -1,9 +1,9 @@
 {
     "name": "sigma-libs",
-    "version": "0.0.5",
+    "version": "0.0.10",
     "description": "Sigma Frameworks Utilities",
     "keywords": [],
-    "homepage": "",
+    "homepage": "http://sigmaframeworks.io/",
     "bugs":
     {
         "url": ""

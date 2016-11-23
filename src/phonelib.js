@@ -175,35 +175,39 @@ function getDialingCode(region) {
 }
 
 function getNumberInfo(number, countryCode) {
-    var phoneUtil = i18n.phonenumbers.PhoneNumberUtil.getInstance();
-    var numberObj = phoneUtil.parseAndKeepRawInput(number, countryCode);
-    var nationalSignificantNumber =
-        phoneUtil.getNationalSignificantNumber(numberObj);
-    var nationalDestinationCode;
-    var subscriberNumber;
-    var ext = numberObj.getExtension();
-    var type = getType(number, countryCode);
+    try {
+        var phoneUtil = i18n.phonenumbers.PhoneNumberUtil.getInstance();
+        var numberObj = phoneUtil.parseAndKeepRawInput(number, countryCode);
+        var nationalSignificantNumber =
+            phoneUtil.getNationalSignificantNumber(numberObj);
+        var nationalDestinationCode;
+        var subscriberNumber;
+        var ext = numberObj.getExtension();
+        var type = getType(number, countryCode);
 
-    var nationalDestinationCodeLength =
-        phoneUtil.getLengthOfNationalDestinationCode(numberObj);
-    if (nationalDestinationCodeLength > 0) {
-        nationalDestinationCode =
-            nationalSignificantNumber.substring(0, nationalDestinationCodeLength);
-        subscriberNumber =
-            nationalSignificantNumber.substring(nationalDestinationCodeLength);
+        var nationalDestinationCodeLength =
+            phoneUtil.getLengthOfNationalDestinationCode(numberObj);
+        if (nationalDestinationCodeLength > 0) {
+            nationalDestinationCode =
+                nationalSignificantNumber.substring(0, nationalDestinationCodeLength);
+            subscriberNumber =
+                nationalSignificantNumber.substring(nationalDestinationCodeLength);
 
-        if (getExample(countryCode, type, true).match(/^(0)|(\(0)/) != null)
-            nationalDestinationCode = "0" + nationalDestinationCode;
-    } else {
-        nationalDestinationCode = '';
-        subscriberNumber = nationalSignificantNumber;
-    }
+            if (getExample(countryCode, type, true).match(/^(0)|(\(0)/) != null)
+                nationalDestinationCode = "0" + nationalDestinationCode;
+        } else {
+            nationalDestinationCode = '';
+            subscriberNumber = nationalSignificantNumber;
+        }
 
-    return {
-        "countryCode": numberObj.getCountryCode(),
-        "areaCode": nationalDestinationCode,
-        "phone": subscriberNumber,
-        "ext": ext
+        return {
+            "countryCode": numberObj.getCountryCode(),
+            "areaCode": nationalDestinationCode,
+            "phone": subscriberNumber,
+            "ext": ext
+        }
+    } catch (e) {
+        return null;
     }
 }
 
